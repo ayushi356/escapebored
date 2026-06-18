@@ -1,49 +1,49 @@
 ---
 ---
 
-<div class="w-full bg-canvas border border-hairline rounded-xl p-6 shadow-level-2 flex flex-col gap-6" id="stats-dashboard">
+<div class="w-full bg-canvas border-2 border-hairline-strong rounded-3xl p-6 shadow-level-2 flex flex-col gap-6" id="stats-dashboard">
   <div class="flex items-center justify-between border-b border-hairline pb-4">
     <div class="flex items-center gap-2">
-      <span class="w-2.5 h-2.5 rounded-full bg-link animate-pulse"></span>
-      <h3 class="text-sm font-mono text-mute uppercase tracking-widest">My Progress</h3>
+      <span class="w-2.5 h-2.5 rounded-full bg-success animate-pulse"></span>
+      <h3 class="text-base font-serif text-ink tracking-tight-sm uppercase font-semibold">My Quiet Log</h3>
     </div>
     <button id="reset-stats-btn" class="text-[10px] font-mono text-mute hover:text-error-deep cursor-pointer transition-colors" title="Reset all data">Reset Data</button>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
     <!-- Clarity Points -->
-    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+    <div class="flex flex-col p-4 bg-canvas-soft border-2 border-hairline rounded-2xl">
       <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Clarity Points</span>
-      <span id="dashboard-points" class="text-3xl font-semibold text-ink tracking-tight-md">0</span>
+      <span id="dashboard-points" class="text-3xl font-serif font-semibold text-ink tracking-tight-md">0</span>
       <span class="text-[10px] text-mute mt-1">Daily Target: 50 CP</span>
     </div>
 
     <!-- Streak Tracker -->
-    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+    <div class="flex flex-col p-4 bg-canvas-soft border-2 border-hairline rounded-2xl">
       <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Daily Streak</span>
-      <span id="dashboard-streak" class="text-3xl font-semibold text-ink tracking-tight-md">0 Days</span>
+      <span id="dashboard-streak" class="text-3xl font-serif font-semibold text-ink tracking-tight-md">0 Days</span>
       <span id="dashboard-streak-desc" class="text-[10px] text-mute mt-1">Start your streak today!</span>
     </div>
 
     <!-- Time Saved -->
-    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+    <div class="flex flex-col p-4 bg-canvas-soft border-2 border-hairline rounded-2xl">
       <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Time Saved</span>
-      <span id="dashboard-minutes-saved" class="text-3xl font-semibold text-ink tracking-tight-md">0 min</span>
+      <span id="dashboard-minutes-saved" class="text-3xl font-serif font-semibold text-ink tracking-tight-md">0 min</span>
       <span class="text-[10px] text-mute mt-1">From doomscrolling</span>
     </div>
   </div>
 
   <!-- Daily Progress Ring & Goal -->
-  <div class="flex items-center gap-4 bg-canvas-soft-2 p-4 rounded-lg border border-hairline">
+  <div class="flex items-center gap-4 bg-canvas-soft p-4 rounded-2xl border-2 border-hairline">
     <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
       <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--color-hairline)" stroke-width="3" />
-        <circle id="goal-progress-circle" cx="18" cy="18" r="16" fill="none" stroke="var(--color-link)" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" class="transition-all duration-500 ease-out" />
+        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--color-hairline-strong)" stroke-width="3.5" />
+        <circle id="goal-progress-circle" cx="18" cy="18" r="16" fill="none" stroke="var(--color-primary)" stroke-width="3.5" stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" class="transition-all duration-500 ease-out" />
       </svg>
       <span id="goal-percentage" class="absolute text-[11px] font-mono font-semibold text-ink">0%</span>
     </div>
     <div>
-      <h4 class="text-sm font-semibold text-ink leading-tight">Daily Focus Target</h4>
+      <h4 class="text-sm font-serif font-semibold text-ink leading-tight">Daily Focus Target</h4>
       <p id="goal-desc" class="text-xs text-body mt-0.5">Earn 50 CP to secure your streak.</p>
     </div>
   </div>
@@ -53,7 +53,7 @@
     <span class="text-[10px] font-mono text-mute uppercase tracking-widest">Today's Completions</span>
     <div id="logs-container" class="flex flex-col gap-2 max-h-48 overflow-y-auto">
       <!-- Injected list elements -->
-      <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded">
+      <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded-2xl">
         No activities completed today yet.
       </div>
     </div>
@@ -125,7 +125,7 @@
     if (streak > 0) {
       if (todayPoints >= target) {
         streakDescEl.textContent = "Streak secured for today! 🎉";
-        streakDescEl.className = "text-[10px] text-link font-medium mt-1";
+        streakDescEl.className = "text-[10px] text-primary font-medium mt-1";
       } else {
         streakDescEl.textContent = `Earn ${target - todayPoints} more CP to secure streak`;
         streakDescEl.className = "text-[10px] text-mute mt-1";
@@ -149,7 +149,7 @@
     logsContainer.innerHTML = '';
     if (todayLog.length === 0) {
       logsContainer.innerHTML = `
-        <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded">
+        <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded-2xl">
           No activities completed today yet.
         </div>
       `;
@@ -157,13 +157,13 @@
       // Show latest logs first
       todayLog.slice().reverse().forEach(item => {
         const itemEl = document.createElement('div');
-        itemEl.className = "flex justify-between items-center text-xs p-2 bg-canvas border border-hairline rounded shadow-level-1 animate-in fade-in slide-in-from-bottom-2 duration-300";
+        itemEl.className = "flex justify-between items-center text-xs p-2 bg-canvas border-2 border-hairline rounded-2xl shadow-level-1 animate-in fade-in slide-in-from-bottom-2 duration-300";
         itemEl.innerHTML = `
           <div class="flex flex-col">
             <span class="font-medium text-ink">${item.name}</span>
             <span class="text-[9px] font-mono text-mute">${item.time}</span>
           </div>
-          <span class="text-link font-mono font-semibold">+${item.points} CP</span>
+          <span class="text-primary font-mono font-semibold">+${item.points} CP</span>
         `;
         logsContainer.appendChild(itemEl);
       });

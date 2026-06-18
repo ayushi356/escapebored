@@ -17,21 +17,22 @@ const {
   ...rest
 } = Astro.props;
 
-const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2";
+const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 btn-cozy shadow-sm";
 
 const variants = {
-  primary: "bg-primary text-on-primary hover:bg-ink/90",
-  secondary: "bg-canvas text-ink border border-hairline hover:bg-canvas-soft",
-  ghost: "bg-transparent text-body hover:bg-canvas-soft-2",
-  'nav-signup': "bg-primary text-on-primary rounded-sm text-sm font-medium h-[28px] px-3",
-  'nav-login': "bg-canvas text-ink rounded-sm text-sm font-medium h-[28px] px-3 hover:bg-canvas-soft",
-  'nav-ai': "bg-canvas text-ink border border-hairline rounded-sm text-sm font-medium h-[28px] px-3 hover:bg-canvas-soft"
+  primary: "bg-primary text-on-primary border border-primary hover:bg-link-deep shadow-[0_2px_6px_rgba(210,110,81,0.15)]",
+  secondary: "bg-canvas text-ink border-2 border-hairline-strong hover:bg-canvas-soft",
+  ghost: "bg-transparent text-body hover:bg-canvas-soft-2 border border-transparent",
+  success: "bg-success text-on-primary border border-success hover:opacity-95 shadow-[0_2px_6px_rgba(110,139,117,0.15)]",
+  'nav-signup': "bg-primary text-on-primary rounded-xl text-sm font-semibold h-[32px] px-4",
+  'nav-login': "bg-canvas text-ink rounded-xl text-sm font-semibold h-[32px] px-4 hover:bg-canvas-soft",
+  'nav-ai': "bg-canvas text-ink border border-hairline rounded-xl text-sm font-semibold h-[32px] px-4 hover:bg-canvas-soft"
 };
 
 const sizes = {
-  sm: "h-8 px-3 text-sm rounded-pill",
-  md: "h-10 px-5 text-sm rounded-pill",
-  lg: "h-12 px-8 text-base rounded-pill"
+  sm: "h-8 px-3 text-xs rounded-xl",
+  md: "h-10 px-5 text-sm rounded-2xl",
+  lg: "h-12 px-8 text-base rounded-3xl"
 };
 
 // Override sizes for nav variants
