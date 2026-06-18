@@ -1,0 +1,248 @@
+---
+---
+
+<div class="w-full bg-canvas border border-hairline rounded-xl p-6 shadow-level-2 flex flex-col gap-6" id="stats-dashboard">
+  <div class="flex items-center justify-between border-b border-hairline pb-4">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-link animate-pulse"></span>
+      <h3 class="text-sm font-mono text-mute uppercase tracking-widest">My Progress</h3>
+    </div>
+    <button id="reset-stats-btn" class="text-[10px] font-mono text-mute hover:text-error-deep cursor-pointer transition-colors" title="Reset all data">Reset Data</button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <!-- Clarity Points -->
+    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+      <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Clarity Points</span>
+      <span id="dashboard-points" class="text-3xl font-semibold text-ink tracking-tight-md">0</span>
+      <span class="text-[10px] text-mute mt-1">Daily Target: 50 CP</span>
+    </div>
+
+    <!-- Streak Tracker -->
+    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+      <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Daily Streak</span>
+      <span id="dashboard-streak" class="text-3xl font-semibold text-ink tracking-tight-md">0 Days</span>
+      <span id="dashboard-streak-desc" class="text-[10px] text-mute mt-1">Start your streak today!</span>
+    </div>
+
+    <!-- Time Saved -->
+    <div class="flex flex-col p-4 bg-canvas-soft border border-hairline rounded-lg">
+      <span class="text-[10px] font-mono text-mute uppercase tracking-widest mb-1">Time Saved</span>
+      <span id="dashboard-minutes-saved" class="text-3xl font-semibold text-ink tracking-tight-md">0 min</span>
+      <span class="text-[10px] text-mute mt-1">From doomscrolling</span>
+    </div>
+  </div>
+
+  <!-- Daily Progress Ring & Goal -->
+  <div class="flex items-center gap-4 bg-canvas-soft-2 p-4 rounded-lg border border-hairline">
+    <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
+      <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--color-hairline)" stroke-width="3" />
+        <circle id="goal-progress-circle" cx="18" cy="18" r="16" fill="none" stroke="var(--color-link)" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" class="transition-all duration-500 ease-out" />
+      </svg>
+      <span id="goal-percentage" class="absolute text-[11px] font-mono font-semibold text-ink">0%</span>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold text-ink leading-tight">Daily Focus Target</h4>
+      <p id="goal-desc" class="text-xs text-body mt-0.5">Earn 50 CP to secure your streak.</p>
+    </div>
+  </div>
+
+  <!-- Recent Log -->
+  <div class="flex flex-col gap-3">
+    <span class="text-[10px] font-mono text-mute uppercase tracking-widest">Today's Completions</span>
+    <div id="logs-container" class="flex flex-col gap-2 max-h-48 overflow-y-auto">
+      <!-- Injected list elements -->
+      <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded">
+        No activities completed today yet.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Helper for localStorage keys
+  const KEYS = {
+    points: 'betterthings_points',
+    streak: 'betterthings_streak',
+    lastDate: 'betterthings_last_date',
+    log: 'betterthings_log',
+    minutesSaved: 'escapebored_minutes_saved'
+  };
+
+  const pointsEl = document.getElementById('dashboard-points');
+  const streakEl = document.getElementById('dashboard-streak');
+  const streakDescEl = document.getElementById('dashboard-streak-desc');
+  const progressCircle = document.getElementById('goal-progress-circle') as unknown as SVGCircleElement;
+  const percentageEl = document.getElementById('goal-percentage');
+  const logsContainer = document.getElementById('logs-container');
+  const goalDesc = document.getElementById('goal-desc');
+  const resetBtn = document.getElementById('reset-stats-btn');
+
+  // Load and refresh state
+  function getTodayDateString() {
+    const today = new Date();
+    return `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function getYesterdayDateString() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return `${yesterday.getFullYear()}-${(yesterday.getMonth()+1).toString().padStart(2, '0')}-${yesterday.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function loadStats() {
+    const points = parseInt(localStorage.getItem(KEYS.points) || '0');
+    const minutesSaved = parseInt(localStorage.getItem(KEYS.minutesSaved) || '0');
+    const minutesSavedEl = document.getElementById('dashboard-minutes-saved');
+    if (minutesSavedEl) {
+      minutesSavedEl.textContent = `${minutesSaved} min`;
+    }
+    let streak = parseInt(localStorage.getItem(KEYS.streak) || '0');
+    const lastDate = localStorage.getItem(KEYS.lastDate);
+    const todayStr = getTodayDateString();
+    const yesterdayStr = getYesterdayDateString();
+
+    // Reset streak if we missed a day
+    if (lastDate && lastDate !== todayStr && lastDate !== yesterdayStr) {
+      streak = 0;
+      localStorage.setItem(KEYS.streak, '0');
+    }
+
+    // Load logs
+    const log = JSON.parse(localStorage.getItem(KEYS.log) || '[]');
+    const todayLog = log.filter(item => item.date === todayStr);
+
+    // Calculate today's points
+    const todayPoints = todayLog.reduce((sum, item) => sum + item.points, 0);
+    const target = 50;
+    const percent = Math.min(Math.round((todayPoints / target) * 100), 100);
+
+    // Update UI
+    pointsEl.textContent = points.toString();
+    streakEl.textContent = `${streak} ${streak === 1 ? 'Day' : 'Days'}`;
+    
+    if (streak > 0) {
+      if (todayPoints >= target) {
+        streakDescEl.textContent = "Streak secured for today! 🎉";
+        streakDescEl.className = "text-[10px] text-link font-medium mt-1";
+      } else {
+        streakDescEl.textContent = `Earn ${target - todayPoints} more CP to secure streak`;
+        streakDescEl.className = "text-[10px] text-mute mt-1";
+      }
+    } else {
+      streakDescEl.textContent = "Start your streak today!";
+      streakDescEl.className = "text-[10px] text-mute mt-1";
+    }
+
+    // Set SVG stroke progress (circle circumference is 2 * PI * r = 2 * 3.14159 * 16 = 100.5)
+    const circum = 100.5;
+    const offset = circum - (percent / 100) * circum;
+    progressCircle.style.strokeDashoffset = offset.toString();
+    percentageEl.textContent = `${percent}%`;
+
+    goalDesc.textContent = todayPoints >= target 
+      ? "Daily focus goal reached! Well done."
+      : `Earned ${todayPoints} of ${target} CP today.`;
+
+    // Render Log
+    logsContainer.innerHTML = '';
+    if (todayLog.length === 0) {
+      logsContainer.innerHTML = `
+        <div class="text-center text-xs text-mute py-4 border border-dashed border-hairline rounded">
+          No activities completed today yet.
+        </div>
+      `;
+    } else {
+      // Show latest logs first
+      todayLog.slice().reverse().forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = "flex justify-between items-center text-xs p-2 bg-canvas border border-hairline rounded shadow-level-1 animate-in fade-in slide-in-from-bottom-2 duration-300";
+        itemEl.innerHTML = `
+          <div class="flex flex-col">
+            <span class="font-medium text-ink">${item.name}</span>
+            <span class="text-[9px] font-mono text-mute">${item.time}</span>
+          </div>
+          <span class="text-link font-mono font-semibold">+${item.points} CP</span>
+        `;
+        logsContainer.appendChild(itemEl);
+      });
+    }
+  }
+
+  // Handle Event
+  window.addEventListener('activityCompleted', (e: CustomEvent) => {
+    const { points, activityName } = e.detail;
+    const todayStr = getTodayDateString();
+    
+    // 1. Add overall points
+    const currentPoints = parseInt(localStorage.getItem(KEYS.points) || '0');
+    localStorage.setItem(KEYS.points, (currentPoints + points).toString());
+
+    // 2. Add to log
+    const log = JSON.parse(localStorage.getItem(KEYS.log) || '[]');
+    const now = new Date();
+    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    log.push({
+      date: todayStr,
+      time: timeStr,
+      name: activityName,
+      points: points
+    });
+    localStorage.setItem(KEYS.log, JSON.stringify(log));
+
+    // 3. Update Streak
+    let streak = parseInt(localStorage.getItem(KEYS.streak) || '0');
+    const lastDate = localStorage.getItem(KEYS.lastDate);
+
+    if (!lastDate) {
+      // First time completion
+      streak = 1;
+      localStorage.setItem(KEYS.streak, '1');
+      localStorage.setItem(KEYS.lastDate, todayStr);
+    } else if (lastDate === getYesterdayDateString()) {
+      // Completed yesterday, continue streak
+      streak++;
+      localStorage.setItem(KEYS.streak, streak.toString());
+      localStorage.setItem(KEYS.lastDate, todayStr);
+    } else if (lastDate === todayStr) {
+      // Already active today, streak keeps its value
+    } else {
+      // Streak broken, start fresh
+      streak = 1;
+      localStorage.setItem(KEYS.streak, '1');
+      localStorage.setItem(KEYS.lastDate, todayStr);
+    }
+
+    // 4. Update Minutes Saved
+    let duration = e.detail.duration;
+    if (duration === undefined) {
+      duration = Math.max(1, Math.round(points / 5));
+    }
+    const currentMin = parseInt(localStorage.getItem(KEYS.minutesSaved) || '0');
+    localStorage.setItem(KEYS.minutesSaved, (currentMin + duration).toString());
+
+    // Refresh display
+    loadStats();
+
+    // Trigger parent app notification of completion
+    const refreshEvent = new CustomEvent('betterthings_refresh_view');
+    window.dispatchEvent(refreshEvent);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to reset all progress, points, and history? This cannot be undone.")) {
+      localStorage.removeItem(KEYS.points);
+      localStorage.removeItem(KEYS.streak);
+      localStorage.removeItem(KEYS.lastDate);
+      localStorage.removeItem(KEYS.log);
+      localStorage.removeItem(KEYS.minutesSaved);
+      localStorage.removeItem('betterthings_reflections');
+      loadStats();
+      window.dispatchEvent(new CustomEvent('betterthings_refresh_view'));
+    }
+  });
+
+  // Initial load
+  loadStats();
+</script>

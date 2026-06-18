@@ -1,0 +1,385 @@
+---
+import Button from '../Button.astro';
+---
+
+<div class="flex flex-col items-center justify-center p-6 w-full max-w-lg mx-auto" data-tool="doodlecanvas">
+  <h4 class="text-xs font-mono text-mute uppercase tracking-widest mb-4 text-center">Creative Doodle Sandbox</h4>
+
+  <div id="doodle-app" class="w-full flex flex-col items-center">
+    <!-- Drawing Prompt Banner -->
+    <div class="w-full bg-canvas-soft border border-hairline rounded-lg p-3.5 mb-4 flex justify-between items-center gap-3">
+      <div class="flex-1 text-left">
+        <span id="prompt-label" class="text-[9px] font-mono text-link font-semibold uppercase tracking-wider block mb-0.5">Drawing Prompt</span>
+        <p id="doodle-prompt-text" class="text-xs font-medium text-white leading-snug">Draw a tea party for a gentleman spider.</p>
+      </div>
+      <button id="doodle-roll-prompt" class="w-7 h-7 rounded bg-white/5 border border-white/10 flex items-center justify-center text-mute hover:text-white hover:bg-white/10 active:scale-95 transition-all cursor-pointer text-xs" title="Roll another prompt">
+        🔄
+      </button>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="w-full flex justify-between items-center bg-canvas-soft-2 border border-hairline border-b-0 rounded-t-lg px-4 py-3 gap-4">
+      <!-- Colors -->
+      <div class="flex gap-2">
+        <button class="color-btn w-6 h-6 rounded-full border-2 border-primary active-color shadow-level-1" style="background-color: #171717;" data-color="#171717"></button>
+        <button class="color-btn w-6 h-6 rounded-full border border-hairline shadow-level-1" style="background-color: #0070f3;" data-color="#0070f3"></button>
+        <button class="color-btn w-6 h-6 rounded-full border border-hairline shadow-level-1" style="background-color: #ff0080;" data-color="#ff0080"></button>
+        <button class="color-btn w-6 h-6 rounded-full border border-hairline shadow-level-1" style="background-color: #50e3c2;" data-color="#50e3c2"></button>
+        <button class="color-btn w-6 h-6 rounded-full border border-hairline shadow-level-1" style="background-color: #f5a623;" data-color="#f5a623"></button>
+      </div>
+
+      <!-- Stroke Weight -->
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-mono text-mute uppercase tracking-widest">Size</span>
+        <input 
+          type="range" 
+          id="brush-size" 
+          min="2" 
+          max="20" 
+          value="4" 
+          class="w-20 h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-2">
+        <button id="doodle-undo" class="p-1 rounded hover:bg-canvas-soft border border-transparent hover:border-hairline text-mute hover:text-ink transition-all" title="Undo">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+        </button>
+        <button id="doodle-clear" class="p-1 rounded hover:bg-canvas-soft border border-transparent hover:border-hairline text-mute hover:text-ink transition-all" title="Clear Canvas">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawing Board -->
+    <div class="relative w-full border border-hairline bg-canvas h-72 rounded-b-lg overflow-hidden shadow-level-1 cursor-crosshair">
+      <!-- Blueprint Grid Background overlay via CSS -->
+      <div class="canvas-grid absolute inset-0 opacity-15 pointer-events-none"></div>
+      <canvas id="doodle-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    </div>
+
+    <!-- Instructions & Controls -->
+    <div class="flex flex-col sm:flex-row justify-between items-center w-full gap-4 mt-6">
+      <span class="text-xs font-mono text-mute">Doodle for at least 30 seconds to focus your mind.</span>
+      
+      <div class="flex gap-2">
+        <Button id="doodle-download" variant="secondary" class="!h-9 !px-4 !text-xs">
+          Export PNG
+        </Button>
+        <Button id="doodle-complete-btn" variant="primary" class="!h-9 !px-4 !text-xs">
+          Finished Drawing
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .canvas-grid {
+    background-size: 20px 20px;
+    background-image: 
+      linear-gradient(to right, var(--color-hairline-strong) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-hairline-strong) 1px, transparent 1px);
+  }
+  .active-color {
+    border-color: var(--color-link) !important;
+    transform: scale(1.15);
+  }
+</style>
+
+<script>
+  const drawingPrompts = [
+    "A tea party hosted by a gentleman spider",
+    "A mechanical fish flying through a nebula",
+    "A mountain range made of melting pocket watches",
+    "An astronaut planting a garden on a small asteroid",
+    "A keyhole that opens into a quiet pine forest",
+    "A cozy lighthouse surrounded by floating jellyfish",
+    "A hot air balloon carried by a giant glowing bubble",
+    "A cat napping on the rings of Saturn",
+    "A magical door hidden in the roots of a giant oak tree",
+    "A cup of coffee with a miniature storm cloud inside",
+    "An origami bird coming to life in a library",
+    "A mysterious message inside a floating bottle",
+    "A typewriter growing wildflowers instead of keys",
+    "A tiny mouse wearing a knight's armor and holding a matchstick",
+    "A staircase winding up into a starry night sky",
+    "A pocket compass where the needle points to a heart",
+    "A glass terrarium holding an entire miniature galaxy",
+    "A friendly cloud shedding soft neon rain",
+    "A train running along a track made of rainbow bands",
+    "A wizard's hat overflowing with shining stars",
+    "A secret treehouse glowing softly in the dark woods",
+    "A slice of moon cake served on a silver platter",
+    "A pocket watch where gears are replaced by small flowers",
+    "A giant whale swimming through a desert of pink sand",
+    "A crystal bottle holding captured summer sunlight",
+    "A paper ship sailing across a desktop keyboard lake",
+    "A pair of reading glasses showing stars in the lenses",
+    "A sleeping dragon curled around a teacup",
+    "A lightbulb containing a growing miniature forest",
+    "A tree where leaves are replaced by open books",
+    "A mysterious stone archway in a field of fireflies"
+  ];
+
+  const dailyPrompts = [
+    "Your current mood represented as a cozy castle in the rain",
+    "An ancient telescope pointing at a newly born neon star",
+    "A tiny snail carrying a glowing lantern on its shell",
+    "A key that opens a portal to the bottom of the deep ocean",
+    "A campfire whose smoke shapes into a soaring phoenix",
+    "A floating island with a single quiet bench"
+  ];
+
+  const canvas = document.getElementById('doodle-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  const brushSizeInput = document.getElementById('brush-size') as HTMLInputElement;
+  const undoBtn = document.getElementById('doodle-undo');
+  const clearBtn = document.getElementById('doodle-clear');
+  const downloadBtn = document.getElementById('doodle-download');
+  const completeBtn = document.getElementById('doodle-complete-btn');
+  const rollPromptBtn = document.getElementById('doodle-roll-prompt');
+
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let brushColor = '#171717';
+  let brushSize = 4;
+  let currentPrompt = "";
+  let isDailyPrompt = false;
+  
+  // History stack for Undo
+  let history: string[] = [];
+  const maxHistorySteps = 20;
+
+  function getTodayString() {
+    const today = new Date();
+    return `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function initPrompt() {
+    const todayStr = getTodayString();
+    let stats = { lastDailyDate: "", history: [] };
+    try {
+      const saved = localStorage.getItem('escapebored_doodle_stats');
+      if (saved) stats = JSON.parse(saved);
+    } catch(e){}
+
+    const promptTextEl = document.getElementById('doodle-prompt-text');
+    const promptLabelEl = document.getElementById('prompt-label');
+
+    if (stats.lastDailyDate !== todayStr) {
+      isDailyPrompt = true;
+      const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+      currentPrompt = dailyPrompts[dayOfYear % dailyPrompts.length];
+      if (promptLabelEl) {
+        promptLabelEl.textContent = "🔥 Daily Creativity Challenge";
+        promptLabelEl.className = "text-[9px] font-mono text-link font-semibold uppercase tracking-wider block mb-0.5 animate-pulse";
+      }
+    } else {
+      isDailyPrompt = false;
+      currentPrompt = drawingPrompts[Math.floor(Math.random() * drawingPrompts.length)];
+      if (promptLabelEl) {
+        promptLabelEl.textContent = "💡 Creative Prompt";
+        promptLabelEl.className = "text-[9px] font-mono text-mute uppercase tracking-wider block mb-0.5";
+      }
+    }
+
+    if (promptTextEl) {
+      promptTextEl.textContent = currentPrompt;
+    }
+  }
+
+  function rollPrompt() {
+    isDailyPrompt = false;
+    currentPrompt = drawingPrompts[Math.floor(Math.random() * drawingPrompts.length)];
+    const promptTextEl = document.getElementById('doodle-prompt-text');
+    const promptLabelEl = document.getElementById('prompt-label');
+
+    if (promptLabelEl) {
+      promptLabelEl.textContent = "💡 Creative Prompt";
+      promptLabelEl.className = "text-[9px] font-mono text-mute uppercase tracking-wider block mb-0.5";
+    }
+
+    if (promptTextEl) {
+      promptTextEl.classList.add('scale-95', 'opacity-50', 'transition-all', 'duration-150');
+      setTimeout(() => {
+        promptTextEl.textContent = currentPrompt;
+        promptTextEl.classList.remove('scale-95', 'opacity-50');
+      }, 150);
+    }
+  }
+
+  function resizeCanvas() {
+    const parent = canvas.parentElement;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.clientHeight;
+    
+    // Fill canvas background to white (so it exports beautifully)
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    saveState();
+  }
+
+  // Save drawing state for undo
+  function saveState() {
+    if (history.length >= maxHistorySteps) {
+      history.shift();
+    }
+    history.push(canvas.toDataURL());
+  }
+
+  function undo() {
+    if (history.length > 1) {
+      history.pop(); // Pop current state
+      const prevState = history[history.length - 1];
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = prevState;
+    }
+  }
+
+  function startDrawing(e) {
+    isDrawing = true;
+    const pos = getMousePos(e);
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+    const pos = getMousePos(e);
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.strokeStyle = brushColor;
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function stopDrawing() {
+    if (isDrawing) {
+      isDrawing = false;
+      saveState();
+    }
+  }
+
+  function getMousePos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  // Setup Event Listeners
+  // Desktop Mouse
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  window.addEventListener('mouseup', stopDrawing);
+
+  // Mobile Touch
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    startDrawing(e);
+  });
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    draw(e);
+  });
+  window.addEventListener('touchend', stopDrawing);
+
+  // Color picker selection
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active-color'));
+      btn.classList.add('active-color');
+      brushColor = btn.getAttribute('data-color');
+    });
+  });
+
+  brushSizeInput.addEventListener('input', () => {
+    brushSize = parseInt(brushSizeInput.value);
+  });
+
+  undoBtn.addEventListener('click', undo);
+
+  clearBtn.addEventListener('click', () => {
+    if (confirm("Clear your masterpiece?")) {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      history = [];
+      saveState();
+    }
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'betterthings-doodle.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+
+  completeBtn.addEventListener('click', () => {
+    let points = 15;
+    let activityName = `Doodle: "${currentPrompt}"`;
+
+    if (isDailyPrompt) {
+      points = 25; // 25 CP (+10 CP bonus)
+      activityName = `Daily Creativity Challenge: "${currentPrompt}"`;
+
+      let stats = { lastDailyDate: "", history: [] };
+      try {
+        const saved = localStorage.getItem('escapebored_doodle_stats');
+        if (saved) stats = JSON.parse(saved);
+        stats.lastDailyDate = getTodayString();
+        stats.history.push({
+          date: getTodayString(),
+          prompt: currentPrompt,
+          points: points
+        });
+        localStorage.setItem('escapebored_doodle_stats', JSON.stringify(stats));
+      } catch (e) {}
+    }
+
+    const event = new CustomEvent('activityCompleted', { 
+      detail: { points: points, activityName: activityName, duration: 3 } 
+    });
+    window.dispatchEvent(event);
+  });
+
+  rollPromptBtn.addEventListener('click', rollPrompt);
+
+  window.addEventListener('betterthings_tool_reset', () => {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    history = [];
+    saveState();
+    initPrompt();
+  });
+
+  // Run on mount
+  setTimeout(() => {
+    resizeCanvas();
+    initPrompt();
+  }, 100);
+</script>
+
+

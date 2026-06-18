@@ -1,0 +1,11 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["absolute inset-0 -z-10 overflow-hidden pointer-events-none", className]}>
+  <div class="mesh-gradient absolute -top-[20%] -left-[10%] w-[120%] h-[80%] opacity-20"></div>
+</div>

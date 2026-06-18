@@ -1,0 +1,463 @@
+---
+import Button from '../Button.astro';
+---
+
+<div class="flex flex-col items-center justify-center p-6 w-full max-w-lg mx-auto relative" data-tool="journal">
+  <!-- Header with streak display -->
+  <div class="flex justify-between items-center w-full mb-4 z-10">
+    <span class="text-xs font-mono text-mute uppercase tracking-widest">Clarity Journaling</span>
+    <div id="journal-streak-display" class="flex items-center gap-1 text-[11px] font-mono text-link font-semibold" title="Reflection Streak">
+      🔥 <span id="journal-streak-val">0</span> Day Streak
+    </div>
+  </div>
+  
+  <div id="journal-wrapper" class="w-full flex flex-col relative">
+    <!-- Prompt Picker -->
+    <div class="mb-4 flex flex-col gap-2">
+      <div class="flex justify-between items-center">
+        <label class="text-[10px] font-mono text-mute uppercase tracking-widest block">Reflective Prompt</label>
+        <button id="journal-ai-prompt-btn" class="text-[10px] font-mono text-link hover:underline cursor-pointer flex items-center gap-1" title="Generate dynamic prompt">
+          🔮 Generate Deep Prompt
+        </button>
+      </div>
+      <select id="prompt-select" class="w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink font-sans outline-none focus:border-hairline-strong transition-all">
+        <option value="anxiety">Anxious/Stressed? Write it here and Release it</option>
+        <option value="gratitude">What are 3 things you are grateful for today?</option>
+        <option value="focus">What is your core focus for the next 2 hours?</option>
+        <option value="success">What is a small win you had today?</option>
+        <option value="custom" id="prompt-option-custom" class="hidden">Dynamic AI Prompt</option>
+      </select>
+    </div>
+
+    <!-- Text area container with relative positioning for overlay -->
+    <div class="relative w-full mb-6">
+      <textarea 
+        id="journal-input" 
+        rows="6" 
+        placeholder="Pour your thoughts out. If it is stress, we will release it. If it is focus or gratitude, we will save it."
+        class="w-full p-4 text-base rounded border border-hairline bg-canvas text-ink font-sans placeholder:text-mute/60 outline-none focus:ring-2 focus:ring-link/20 focus:border-link transition-all resize-none leading-relaxed"
+      ></textarea>
+      
+      <!-- Canvas overlay for burn/dissolve particle animation -->
+      <canvas id="burn-canvas" class="absolute inset-0 w-full h-full pointer-events-none rounded opacity-0 transition-opacity duration-300"></canvas>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex gap-4 w-full justify-between items-center">
+      <span id="char-counter" class="text-xs font-mono text-mute">0 characters</span>
+      
+      <div class="flex gap-2">
+        <Button id="journal-burn-btn" variant="secondary" class="!h-9 !px-4 !text-xs !bg-error-soft/30 !text-error-deep hover:!bg-error-soft/60 border-0 flex items-center gap-1.5 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+          </svg>
+          Release & Burn
+        </Button>
+        <Button id="journal-save-btn" variant="primary" class="!h-9 !px-4 !text-xs">Save to Log</Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed State -->
+  <div id="journal-completed" class="hidden text-center py-6 w-full flex flex-col items-center">
+    <div class="w-14 h-14 rounded-full bg-link/10 flex items-center justify-center text-link mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+    </div>
+    <h3 id="completed-title" class="text-2xl font-semibold text-ink mb-2">Entry Saved</h3>
+    <p id="completed-desc" class="text-body text-sm mb-6 max-w-xs">Reflection completed. One small step towards clarity.</p>
+    <Button id="journal-complete-btn" variant="success" class="w-48 !h-11 !text-sm">Complete →</Button>
+  </div>
+</div>
+
+<script>
+  const promptSelect = document.getElementById('prompt-select') as HTMLSelectElement;
+  const textarea = document.getElementById('journal-input') as HTMLTextAreaElement;
+  const charCounter = document.getElementById('char-counter');
+  const burnBtn = document.getElementById('journal-burn-btn');
+  const saveBtn = document.getElementById('journal-save-btn');
+  const completeBtn = document.getElementById('journal-complete-btn');
+  const journalWrapper = document.getElementById('journal-wrapper');
+  const completedSection = document.getElementById('journal-completed');
+  const completedTitle = document.getElementById('completed-title');
+  const completedDesc = document.getElementById('completed-desc');
+  const aiPromptBtn = document.getElementById('journal-ai-prompt-btn');
+  const customOption = document.getElementById('prompt-option-custom') as HTMLOptionElement;
+
+  const canvas = document.getElementById('burn-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+
+  const placeholders = {
+    anxiety: "What is causing you anxiety right now? Write it down honestly. We will burn it away when you are done. It will not be stored anywhere.",
+    gratitude: "1. \n2. \n3. ",
+    focus: "My primary task right now is... \nWhy this matters... \nSteps to finish it...",
+    success: "What is a small victory you had today, however tiny? How did it feel?"
+  };
+
+  const aiVerbs = [
+    "If your current",
+    "Imagine that your",
+    "If you could explain your",
+    "Describe how your",
+    "If you were to paint your"
+  ];
+  const aiSubjects = [
+    "mindfulness state",
+    "distraction level right now",
+    "deepest goal for today",
+    "relationship with scrolling",
+    "creative energy at this moment"
+  ];
+  const aiMetaphors = [
+    "was a physical key—what door does it unlock?",
+    "was a weather pattern—what storm or breeze would it be?",
+    "was a conversation with a Victorian philosopher—what warning would they give you?",
+    "was a plant—how much sunlight and water does it need to grow?",
+    "was a silent shadow—what is it quietly trying to remind you of?"
+  ];
+
+  const JOURNAL_KEYS = {
+    metadata: 'escapebored_journal_metadata'
+  };
+
+  function getTodayString() {
+    const today = new Date();
+    return `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function getYesterdayString() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return `${yesterday.getFullYear()}-${(yesterday.getMonth()+1).toString().padStart(2, '0')}-${yesterday.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function loadJournalMetadata() {
+    const defaultMeta = { currentStreak: 0, longestStreak: 0, lastJournaledDate: '' };
+    try {
+      const saved = localStorage.getItem(JOURNAL_KEYS.metadata);
+      return saved ? JSON.parse(saved) : defaultMeta;
+    } catch(e) {
+      return defaultMeta;
+    }
+  }
+
+  function saveJournalMetadata(meta) {
+    try {
+      localStorage.setItem(JOURNAL_KEYS.metadata, JSON.stringify(meta));
+    } catch(e) {}
+  }
+
+  function renderStreak() {
+    const meta = loadJournalMetadata();
+    const todayStr = getTodayString();
+    const yesterdayStr = getYesterdayString();
+
+    // Reset streak if we missed a day
+    if (meta.lastJournaledDate && meta.lastJournaledDate !== todayStr && meta.lastJournaledDate !== yesterdayStr) {
+      meta.currentStreak = 0;
+      saveJournalMetadata(meta);
+    }
+
+    const streakVal = document.getElementById('journal-streak-val');
+    if (streakVal) streakVal.textContent = meta.currentStreak.toString();
+  }
+
+  function updateStreakAfterEntry() {
+    const meta = loadJournalMetadata();
+    const todayStr = getTodayString();
+    
+    if (meta.lastJournaledDate === getYesterdayString()) {
+      meta.currentStreak++;
+      if (meta.currentStreak > meta.longestStreak) {
+        meta.longestStreak = meta.currentStreak;
+      }
+    } else if (meta.lastJournaledDate === todayStr) {
+      // Already journaled today, maintain current streak count
+    } else {
+      meta.currentStreak = 1;
+    }
+    
+    meta.lastJournaledDate = todayStr;
+    saveJournalMetadata(meta);
+    renderStreak();
+  }
+
+  function generateAIPrompt() {
+    const verb = aiVerbs[Math.floor(Math.random() * aiVerbs.length)];
+    const subject = aiSubjects[Math.floor(Math.random() * aiSubjects.length)];
+    const metaphor = aiMetaphors[Math.floor(Math.random() * aiMetaphors.length)];
+    return `${verb} ${subject} ${metaphor}`;
+  }
+
+  aiPromptBtn.addEventListener('click', () => {
+    const promptText = generateAIPrompt();
+    if (customOption) {
+      customOption.textContent = `🔮 ${promptText}`;
+      customOption.value = "custom";
+      customOption.classList.remove('hidden');
+      promptSelect.value = "custom";
+      textarea.value = '';
+      textarea.placeholder = "Write your deep reflections here...";
+      updateCounter();
+      burnBtn.classList.add('opacity-50');
+      
+      // Focus textarea
+      textarea.focus();
+    }
+  });
+
+  // Change placeholders and button states depending on select
+  promptSelect.addEventListener('change', () => {
+    const val = promptSelect.value;
+    textarea.value = '';
+    textarea.placeholder = placeholders[val] || "Write your reflections here...";
+    updateCounter();
+    
+    // Highlight "Release" button for anxiety
+    if (val === 'anxiety') {
+      burnBtn.classList.remove('opacity-50');
+      burnBtn.classList.add('!bg-error-soft/30');
+    } else {
+      burnBtn.classList.add('opacity-50');
+    }
+  });
+
+  function updateCounter() {
+    charCounter.textContent = `${textarea.value.length} characters`;
+  }
+  textarea.addEventListener('input', updateCounter);
+
+  // Synthesizer audio effect for burning
+  function playBurnSound() {
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const bufferSize = audioCtx.sampleRate * 2;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      noise.loop = true;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+      filter.Q.setValueAtTime(2.0, audioCtx.currentTime);
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const osc = audioCtx.createOscillator();
+      const oscGain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(90, audioCtx.currentTime);
+      oscGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
+      osc.connect(oscGain);
+      oscGain.connect(audioCtx.destination);
+
+      osc.start();
+      noise.start();
+
+      osc.stop(audioCtx.currentTime + 1.9);
+      noise.stop(audioCtx.currentTime + 1.9);
+    } catch(e){}
+  }
+
+  // Particle Burn Animation logic
+  interface Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    life: number;
+    maxLife: number;
+    color: string;
+    radius: number;
+  }
+
+  function runBurnAnimation(callback) {
+    playBurnSound();
+
+    const rect = textarea.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    canvas.style.opacity = '1';
+    
+    textarea.style.color = 'transparent';
+    textarea.style.textShadow = 'none';
+
+    const particles: Particle[] = [];
+    const text = textarea.value;
+    const lines = text.split('\n');
+    
+    lines.forEach((line, lineIdx) => {
+      const y = 30 + lineIdx * 24;
+      const length = line.length;
+      for (let i = 0; i < length; i += 2) {
+        const x = 20 + (i * 9);
+        if (x < rect.width - 20) {
+          particles.push({
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: -Math.random() * 2 - 0.5,
+            life: Math.random() * 40 + 40,
+            maxLife: 80,
+            radius: Math.random() * 2.5 + 1,
+            color: `rgba(${200 + Math.floor(Math.random() * 55)}, ${100 + Math.floor(Math.random() * 100)}, ${30}, ${Math.random()})`
+          });
+        }
+      }
+    });
+
+    let animationFrame = 0;
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      let alive = false;
+      particles.forEach((p) => {
+        if (p.life > 0) {
+          alive = true;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy -= 0.02;
+          p.life--;
+          
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          
+          if (p.life < p.maxLife * 0.4) {
+            p.color = `rgba(130, 130, 130, ${p.life / p.maxLife})`;
+            p.radius += 0.05;
+          }
+        }
+      });
+
+      if (alive) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(animationFrame);
+        canvas.style.opacity = '0';
+        textarea.style.color = '';
+        callback();
+      }
+    }
+
+    animate();
+  }
+
+  // Burn Action
+  burnBtn.addEventListener('click', () => {
+    if (!textarea.value.trim()) return;
+    
+    promptSelect.disabled = true;
+    textarea.disabled = true;
+    burnBtn.classList.add('pointer-events-none', 'opacity-50');
+    saveBtn.classList.add('pointer-events-none', 'opacity-50');
+
+    runBurnAnimation(() => {
+      completedTitle.textContent = "Thoughts Released";
+      completedDesc.textContent = "Your worries have been dissolved into ash. Take a deep breath and start fresh.";
+      journalWrapper.classList.add('hidden');
+      completedSection.classList.remove('hidden');
+    });
+  });
+
+  // Save Action
+  saveBtn.addEventListener('click', () => {
+    const text = textarea.value.trim();
+    if (!text) return;
+
+    try {
+      const logs = JSON.parse(localStorage.getItem('betterthings_reflections') || '[]');
+      const promptText = promptSelect.value === 'custom' ? customOption.textContent : promptSelect.options[promptSelect.selectedIndex].text;
+      logs.push({
+        date: new Date().toISOString(),
+        prompt: promptText,
+        text: text
+      });
+      localStorage.setItem('betterthings_reflections', JSON.stringify(logs));
+    } catch(e){}
+
+    completedTitle.textContent = "Entry Saved";
+    completedDesc.textContent = "Your reflection has been added to your log. Focus on the positive steps ahead.";
+    journalWrapper.classList.add('hidden');
+    completedSection.classList.remove('hidden');
+    
+    // Success chime
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(523, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.4);
+    } catch(e){}
+  });
+
+  completeBtn.addEventListener('click', () => {
+    const val = promptSelect.value;
+    const isAnxiety = val === 'anxiety';
+    
+    // Calculate points: anxiety = 15 CP, regular = 20 CP, custom AI prompt = 25 CP
+    let points = 20;
+    if (isAnxiety) points = 15;
+    else if (val === 'custom') points = 25; // Dynamic AI Prompt Reflection Bonus
+
+    const duration = isAnxiety ? 2 : 3;
+    const promptText = val === 'custom' ? customOption.textContent : promptSelect.options[promptSelect.selectedIndex].text;
+
+    // Update streak metadata
+    updateStreakAfterEntry();
+
+    const event = new CustomEvent('activityCompleted', { 
+      detail: { 
+        points: points, 
+        activityName: `Journal: "${promptText}"`,
+        duration: duration
+      } 
+    });
+    window.dispatchEvent(event);
+  });
+
+  // Run on mount
+  renderStreak();
+
+  window.addEventListener('betterthings_tool_reset', () => {
+    promptSelect.disabled = false;
+    textarea.disabled = false;
+    textarea.value = '';
+    textarea.style.color = '';
+    updateCounter();
+    burnBtn.classList.remove('pointer-events-none', 'opacity-50');
+    saveBtn.classList.remove('pointer-events-none', 'opacity-50');
+    journalWrapper.classList.remove('hidden');
+    completedSection.classList.add('hidden');
+    
+    // Reset option picker
+    promptSelect.value = 'anxiety';
+    textarea.placeholder = placeholders['anxiety'];
+    if (customOption) {
+      customOption.classList.add('hidden');
+    }
+    renderStreak();
+  });
+</script>
+

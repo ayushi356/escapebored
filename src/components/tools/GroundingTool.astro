@@ -1,0 +1,232 @@
+---
+import Button from '../Button.astro';
+---
+
+<div class="flex flex-col items-center justify-center p-6 w-full max-w-lg mx-auto" data-tool="grounding">
+  <h4 class="text-xs font-mono text-error-deep uppercase tracking-widest mb-2 text-center flex items-center gap-1.5 justify-center">
+    <span class="w-1.5 h-1.5 rounded-full bg-error-deep animate-ping"></span>
+    Emergency Grounding Protocol
+  </h4>
+  <p class="text-xs text-mute text-center mb-6">Let's connect with your physical environment to break the scrolling trance.</p>
+
+  <div id="grounding-app" class="w-full flex flex-col items-center">
+    <!-- Progress Indicator -->
+    <div class="w-full flex justify-between items-center mb-6 px-1">
+      <span id="grounding-step-name" class="text-sm font-semibold text-ink">5. Sight</span>
+      <span id="grounding-step-count" class="text-xs font-mono text-mute">Step 1 of 5</span>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="w-full h-1 bg-hairline rounded-full mb-8 overflow-hidden">
+      <div id="grounding-progress-bar" class="h-full bg-error-deep w-[20%] transition-all duration-500 ease-out"></div>
+    </div>
+
+    <!-- Step Screens Container -->
+    <div class="w-full min-h-[160px] flex flex-col justify-center mb-8 relative">
+      <!-- Step 5 Sights -->
+      <div id="step-5" class="grounding-step w-full space-y-3">
+        <p class="text-sm text-body">Type <strong class="text-ink">5 things you can see</strong> in your room right now:</p>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="text" class="step-5-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="1. E.g. Blue mug" />
+          <input type="text" class="step-5-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="2. E.g. Green plant" />
+          <input type="text" class="step-5-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="3. E.g. Laptop monitor" />
+          <input type="text" class="step-5-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="4. E.g. Desk lamp" />
+          <input type="text" class="step-5-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="5. E.g. Wooden chair" />
+        </div>
+      </div>
+
+      <!-- Step 4 Touch -->
+      <div id="step-4" class="grounding-step w-full space-y-3 hidden opacity-0 transition-opacity duration-300">
+        <p class="text-sm text-body">Type <strong class="text-ink">4 things you can physically feel</strong> (e.g. surface of desk, feet on ground):</p>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="text" class="step-4-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="1. E.g. Hard keys under fingers" />
+          <input type="text" class="step-4-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="2. E.g. Soft cotton socks" />
+          <input type="text" class="step-4-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="3. E.g. Cool desk surface" />
+          <input type="text" class="step-4-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="4. E.g. Backrest of the chair" />
+        </div>
+      </div>
+
+      <!-- Step 3 Sound -->
+      <div id="step-3" class="grounding-step w-full space-y-3 hidden opacity-0 transition-opacity duration-300">
+        <p class="text-sm text-body">Type <strong class="text-ink">3 things you can hear</strong> in the background (e.g. hum of fan, birds):</p>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="text" class="step-3-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="1. E.g. Whirring of computer fan" />
+          <input type="text" class="step-3-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="2. E.g. Distant sound of traffic" />
+          <input type="text" class="step-3-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="3. E.g. Birds chirping outside" />
+        </div>
+      </div>
+
+      <!-- Step 2 Smell -->
+      <div id="step-2" class="grounding-step w-full space-y-3 hidden opacity-0 transition-opacity duration-300">
+        <p class="text-sm text-body">Type <strong class="text-ink">2 things you can smell</strong> or remember fondly (e.g. coffee, rain):</p>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="text" class="step-2-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="1. E.g. Smell of ground coffee" />
+          <input type="text" class="step-2-input form-input-lg w-full h-10 px-3 text-sm rounded border border-hairline bg-canvas text-ink" placeholder="2. E.g. Fresh laundry scent" />
+        </div>
+      </div>
+
+      <!-- Step 1 Taste / Mantra -->
+      <div id="step-1" class="grounding-step w-full space-y-3 hidden opacity-0 transition-opacity duration-300">
+        <p class="text-sm text-body">Type <strong class="text-ink">1 positive thought</strong> or statement to ground yourself (e.g. "I am here"):</p>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="text" class="step-1-input form-input-lg w-full h-12 px-3 text-base rounded border border-hairline bg-canvas text-ink" placeholder="E.g. I am in control of my time." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex gap-4 w-full justify-center">
+      <Button id="grounding-back-btn" variant="secondary" class="w-32 !h-11 !text-sm disabled:opacity-30 disabled:pointer-events-none" disabled>Back</Button>
+      <Button id="grounding-next-btn" variant="primary" class="w-32 !h-11 !text-sm">Next Step</Button>
+      <Button id="grounding-complete-btn" variant="success" class="w-48 !h-11 !text-sm hidden">Finish Grounding →</Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentStep = 5; // 5 -> 4 -> 3 -> 2 -> 1
+  const stepProgressBar = document.getElementById('grounding-progress-bar');
+  const stepNameText = document.getElementById('grounding-step-name');
+  const stepCountText = document.getElementById('grounding-step-count');
+  
+  const backBtn = document.getElementById('grounding-back-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('grounding-next-btn');
+  const completeBtn = document.getElementById('grounding-complete-btn');
+
+  const stepNames = {
+    5: "5. Sight",
+    4: "4. Touch",
+    3: "3. Sound",
+    2: "2. Smell",
+    1: "1. Mantra"
+  };
+
+  const stepIndexes = {
+    5: 1,
+    4: 2,
+    3: 3,
+    2: 4,
+    1: 5
+  };
+
+  function updateStepUI() {
+    // Hide all steps
+    document.querySelectorAll('.grounding-step').forEach(el => {
+      el.classList.add('hidden');
+      el.classList.remove('opacity-100');
+      el.classList.add('opacity-0');
+    });
+
+    // Show current step
+    const currentEl = document.getElementById(`step-${currentStep}`);
+    if (currentEl) {
+      currentEl.classList.remove('hidden');
+      setTimeout(() => {
+        currentEl.classList.remove('opacity-0');
+        currentEl.classList.add('opacity-100');
+        // Auto-focus the first input of that step
+        const firstInput = currentEl.querySelector('input') as HTMLInputElement;
+        if (firstInput) firstInput.focus();
+      }, 50);
+    }
+
+    // Update progress elements
+    const idx = stepIndexes[currentStep];
+    const percentage = idx * 20;
+    stepProgressBar.style.width = `${percentage}%`;
+    stepNameText.textContent = stepNames[currentStep];
+    stepCountText.textContent = `Step ${idx} of 5`;
+
+    // Manage Buttons
+    backBtn.disabled = currentStep === 5;
+    if (currentStep === 1) {
+      nextBtn.classList.add('hidden');
+      completeBtn.classList.remove('hidden');
+    } else {
+      nextBtn.classList.remove('hidden');
+      completeBtn.classList.add('hidden');
+    }
+  }
+
+  function validateStepInputs() {
+    const inputs = document.querySelectorAll(`.step-${currentStep}-input`) as NodeListOf<HTMLInputElement>;
+    let allValid = true;
+    inputs.forEach(input => {
+      if (!input.value.trim()) {
+        input.classList.add('border-error-deep', 'bg-error-soft/10');
+        allValid = false;
+      } else {
+        input.classList.remove('border-error-deep', 'bg-error-soft/10');
+      }
+    });
+    return allValid;
+  }
+
+  function playTickSound() {
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(400 + (6 - currentStep) * 80, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+    } catch(e){}
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (validateStepInputs()) {
+      playTickSound();
+      currentStep--;
+      updateStepUI();
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep < 5) {
+      currentStep++;
+      updateStepUI();
+    }
+  });
+
+  // Enable enter key to go to next step
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const activeElement = document.activeElement;
+      if (activeElement && activeElement.tagName === 'INPUT' && activeElement.classList.contains(`step-${currentStep}-input`)) {
+        e.preventDefault();
+        if (currentStep > 1) {
+          nextBtn.click();
+        } else {
+          completeBtn.click();
+        }
+      }
+    }
+  });
+
+  completeBtn.addEventListener('click', () => {
+    if (validateStepInputs()) {
+      // Award 25 Clarity Points for full emergency grounding
+      const event = new CustomEvent('activityCompleted', { 
+        detail: { points: 25, activityName: 'Emergency Grounding Protocol', duration: 3 } 
+      });
+      window.dispatchEvent(event);
+    }
+  });
+
+  // Initial setup
+  updateStepUI();
+
+  window.addEventListener('betterthings_tool_reset', () => {
+    currentStep = 5;
+    document.querySelectorAll('.grounding-step input').forEach(input => {
+      (input as HTMLInputElement).value = '';
+      input.classList.remove('border-error-deep', 'bg-error-soft/10');
+    });
+    updateStepUI();
+  });
+</script>
+

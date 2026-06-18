@@ -1,0 +1,802 @@
+[
+  {
+    "id": 1,
+    "title": "Victorian Slang Shoutout",
+    "description": "Learn the Victorian slang term 'Gigglemug' (a person who smiles constantly). Try to smile like a gigglemug for 10 seconds to release facial tension.",
+    "time": "30 seconds",
+    "category": "Linguistics",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 2,
+    "title": "Invent a 30s Brand Tagline",
+    "description": "Look at the nearest object (e.g., a cup or a pen). Give it a high-tech brand name and write a 3-word tagline for it (e.g., 'Hydration 2.0').",
+    "time": "30 seconds",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 3,
+    "title": "The Emu War Fact",
+    "description": "Did you know that in 1932, the Australian military lost a war against 20,000 emus? The flightless birds proved too agile for machine guns.",
+    "time": "30 seconds",
+    "category": "History",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 4,
+    "title": "Wikipedia Punctuation Article",
+    "description": "Did you know Wikipedia has an article named simply '?' about the punctuation mark? Read its first sentence from your memory or search.",
+    "time": "30 seconds",
+    "category": "Curiosity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 5,
+    "title": "Decipher Victorian Slang",
+    "description": "Look up Victorian-era slang like 'mumblepeg' or 'gallimaufry'. Write down a sentence applying it to your current day.",
+    "time": "2 minutes",
+    "category": "Linguistics",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 6,
+    "title": "Draft a Cat Conspiracy Theory",
+    "description": "Write a funny 2-sentence theory about why domestic cats stare blankly at corners. Are they downloading system updates from an alien spaceship?",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 7,
+    "title": "Six-Word Micro-Story",
+    "description": "Write a complete narrative in exactly 6 words. Try to capture a feeling of cosmic mystery, sci-fi adventure, or profound relief.",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 8,
+    "title": "Opposite-Hand Room Mapping",
+    "description": "Use the doodle tool to draw a quick map of your room from memory, but only using your non-dominant hand. Keep eyes closed for the first 15 seconds.",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 9,
+    "title": "Invent a Useless Startup",
+    "description": "Take the nearest physical object and pair it with a tech buzzword (e.g., AI or blockchain). Spend 5 minutes outlining a pitch for this useless product.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 10,
+    "title": "The Great Emu War of 1932",
+    "description": "Research the bizarre military action where the Australian army deployed machine guns against flightless birds, and somehow lost to the emus.",
+    "time": "5 minutes",
+    "category": "History",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 11,
+    "title": "The Dancing Plague of 1518",
+    "description": "Read about the Strasbourg incident where hundreds of citizens danced in the streets uncontrollably for days without a clear medical reason.",
+    "time": "5 minutes",
+    "category": "History",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 12,
+    "title": "Locate Tristan da Cunha",
+    "description": "Search for the most remote inhabited island on Earth on satellite maps. Spot its single harbor and imagine living 1,500 miles from any mainland.",
+    "time": "5 minutes",
+    "category": "Curiosity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 13,
+    "title": "Voynich Herbology Speculation",
+    "description": "Look at a page from the undeciphered Voynich Manuscript featuring drawings of non-existent plants. Invent and record three magical properties of one plant.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 14,
+    "title": "Draft an Emotional Recipe",
+    "description": "Write a recipe for a dish using only human emotions and sensory concepts, e.g., '1 cup of nostalgic warmth, whisked with a dash of twilight.'",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 15,
+    "title": "The Dog Ear Protector Patent",
+    "description": "Look up weird historical patents, specifically the 'animal ear protectors' (Patent USD281541S). Try to figure out why the inventor thought dogs needed earmuffs.",
+    "time": "5 minutes",
+    "category": "Curiosity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 16,
+    "title": "The Toynbee Tiles Mystery",
+    "description": "Learn about the mysterious linoleum messages embedded in city asphalt across the Americas since the 1980s. Nobody knows who laid them.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 17,
+    "title": "The Global Hum Phenomenon",
+    "description": "Read about 'The Hum'—a mysterious low-frequency hum heard by a tiny percentage of the population worldwide that science cannot explain.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 18,
+    "title": "The Mojave Phone Booth",
+    "description": "Read about the phone booth that stood completely alone in the middle of the Mojave Desert, attracting calls from all over the world.",
+    "time": "5 minutes",
+    "category": "Curiosity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 19,
+    "title": "Write to Caesar as Tech Support",
+    "description": "Draft an imaginary customer support ticket explaining to Julius Caesar why the leap year is crashing his Roman calendar database.",
+    "time": "15 minutes",
+    "category": "Creativity",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 20,
+    "title": "The Strange Appetite of Tarrare",
+    "description": "Read the historical account of Tarrare, an 18th-century French showman known for his extreme eating habits, including eating a live cat.",
+    "time": "15 minutes",
+    "category": "History",
+    "moods": ["Bored"]
+  },
+  {
+    "id": 21,
+    "title": "The Bloop Mystery Stat",
+    "description": "In 1997, a loud underwater sound called 'The Bloop' was detected. It was later found to be the sound of an icequake breaking off Antarctica.",
+    "time": "30 seconds",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 22,
+    "title": "Speed of Light Limit",
+    "description": "Did you know that if you traveled at the speed of light, it would still take you 4.2 years to reach Proxima Centauri, our closest star neighbor?",
+    "time": "30 seconds",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 23,
+    "title": "Tardigrade Space Survival",
+    "description": "Did you know tardigrades (water bears) can survive the vacuum of space, temperatures near absolute zero, and 10 days without moisture?",
+    "time": "30 seconds",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 24,
+    "title": "Banana Radiation Check",
+    "description": "Did you know bananas contain potassium-40, making them slightly radioactive? You would need to eat 10 million bananas at once to die of radiation.",
+    "time": "30 seconds",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 25,
+    "title": "The Mpemba Effect Anomaly",
+    "description": "Read about the counterintuitive physics phenomenon where hot water can freeze faster than cold water under identical conditions.",
+    "time": "2 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 26,
+    "title": "Pin Tumbler Lock Mechanics",
+    "description": "Look at an animated diagram of how keys interact with pins in a pin tumbler lock. Understand how lockpicking operates.",
+    "time": "2 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 27,
+    "title": "The Flannan Isles Disappearance",
+    "description": "Research the 1900 disappearance of three lighthouse keepers from a remote Scottish island. They vanished from a locked island without a trace.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 28,
+    "title": "Listen to the Original Bloop Sound",
+    "description": "Search for the 'Bloop' recording. Learn about this ultra-low-frequency underwater sound detected in 1997 that baffled marine biologists.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 29,
+    "title": "The Wow! Signal Anomaly",
+    "description": "Read about the strong narrowband radio signal detected in 1977 that matches the expected signature of an extraterrestrial transmission.",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 30,
+    "title": "Oumuamua Interstellar Mystery",
+    "description": "Learn about Oumuamua, the first interstellar object detected passing through our solar system, which exhibited unexplained non-gravitational acceleration.",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 31,
+    "title": "Schrodinger's Cat Paradox",
+    "description": "Read an intuitive breakdown of Schrodinger's Cat quantum physics paradox. Understand how superposition allows a system to hold multiple states at once.",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 32,
+    "title": "Test Your Mandela Effect Memory",
+    "description": "Look up Mandela Effect examples. Do you recall 'Berenstain Bears' or 'Berenstein'? Does the Monopoly man wear a monocle? See if your memories glitch.",
+    "time": "5 minutes",
+    "category": "Curiosity",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 33,
+    "title": "The Green Children of Woolpit",
+    "description": "Read the 12th-century legend of two green-skinned children who appeared in an English village speaking an unknown language.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 34,
+    "title": "The Tunguska Event of 1908",
+    "description": "Read about the massive Siberian explosion that flattened 80 million trees over 800 square miles, believed to be caused by a meteor airburst.",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 35,
+    "title": "The Voynich Botanical Pages",
+    "description": "Examine Voynich Manuscript drawings. Choose one bizarre plant drawing and write down what imaginary healing properties it holds.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 36,
+    "title": "Solve a Lateral Thinking Puzzle",
+    "description": "Read this puzzle: A man walks into a bar and asks for a glass of water. The bartender pulls a gun. The man says thank you and leaves. Why? Answer: He had hiccups.",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 37,
+    "title": "The Mary Celeste Crewless Ship",
+    "description": "Read about the Mary Celeste, found floating crewless, undamaged, and with all cargo intact in 1872. Why did the crew vanish?",
+    "time": "5 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 38,
+    "title": "Search for Tabby's Star (KIC 8462852)",
+    "description": "Read about Tabby's Star, whose irregular and massive dipping brightness sparked theories of an alien megastructure (Dyson Sphere).",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 39,
+    "title": "Oak Island Pit Flood Traps",
+    "description": "Investigate the Oak Island Money Pit mystery and the elaborate underground flood tunnels designed to prevent excavators from reaching the treasure.",
+    "time": "15 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 40,
+    "title": "The Lead Mask Case of 1966",
+    "description": "Research the mysterious deaths of two electronic technicians on a Brazilian hill, found wearing lead eye masks and carrying a cryptic notebook.",
+    "time": "15 minutes",
+    "category": "Mystery",
+    "moods": ["Curious"]
+  },
+  {
+    "id": 41,
+    "title": "Elbow Plank Challenge",
+    "description": "Drop down and perform a solid elbow plank. Focus on keeping your core locked and your posture straight.",
+    "time": "30 seconds",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 42,
+    "title": "20-20-20 Eye Reset Rule",
+    "description": "Stare at an object at least 20 feet away for 20 seconds. This relaxes your ciliary muscles and prevents screen-induced digital fatigue.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 43,
+    "title": "Isometric Hands Press",
+    "description": "Press your palms together as hard as possible in front of your chest. Hold this tension for 30 seconds, focusing on muscle activation.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 44,
+    "title": "Finger Stretch Sequence",
+    "description": "Spread your fingers as wide as possible for 10 seconds. Shake your hands out vigorously. Repeat 3 times to break typing stiffness.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 45,
+    "title": "Blind Balance Challenge",
+    "description": "Stand up. Close your eyes. Try to balance on your non-dominant foot for exactly 60 seconds without placing your other foot down.",
+    "time": "2 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 46,
+    "title": "Infinity Loop Air Tracing",
+    "description": "Raise both hands. Simultaneously trace the infinity loop figure-8 in the air. This bilateral movement coordinates left and right brain lobes.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 47,
+    "title": "15 Rapid Air Squats",
+    "description": "Stand up and perform 15 rapid, deep air squats. This gets blood flowing to your legs to burn off excess physical energy.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 48,
+    "title": "Finger-Drumming Rhythms",
+    "description": "Sit up straight. Tap a complex, rapid rhythm on your desk using all ten fingers independently. Focus on the physical tactile feel.",
+    "time": "2 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 49,
+    "title": "Color Gradient Sorting",
+    "description": "Pick 5 books or nearby colored items in your room. Arrange them in a perfect gradient by color. It is a satisfying tactile task.",
+    "time": "2 minutes",
+    "category": "Productivity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 50,
+    "title": "Reaction Speed Drop Test",
+    "description": "Hold a pen at arm's length. Let it drop and catch it with your other hand before it travels more than a few inches. Repeat 10 times.",
+    "time": "2 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 51,
+    "title": "Wall Sit Endurance Test",
+    "description": "Press your back flat against a wall. Lower your body until your thighs are parallel to the floor. Hold this position for 2 minutes.",
+    "time": "2 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 52,
+    "title": "10 Desk Edge Push-ups",
+    "description": "Place your hands on the edge of your desk, step back, and perform 10 slow push-ups. This boosts upper body blood circulation.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 53,
+    "title": "Concentric Circles Canvas Challenge",
+    "description": "Open the doodle canvas. Try to draw 10 concentric circles freehand on the canvas without your lines crossing each other.",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 54,
+    "title": "Scrap Paper Airplane Speed-fold",
+    "description": "Grab a scrap piece of paper. Fold a classic paper airplane as fast as possible. Throw it across your room and check how far it flies.",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 55,
+    "title": "Opposite-Direction Arm Circles",
+    "description": "Rotate your right arm forward and your left arm backward simultaneously. Swap directions after 30 seconds. Tests coordination.",
+    "time": "2 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 56,
+    "title": "Beat the Mindful Typing Sprint",
+    "description": "Open the Typing Sprint widget. Focus completely and try to type the quote in under 30 seconds with high speed.",
+    "time": "5 minutes",
+    "category": "Challenge",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 57,
+    "title": "Write an Alphabet Pangram",
+    "description": "Try to write a custom sentence in your journal that uses every letter of the alphabet (a pangram) without searching for templates.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 58,
+    "title": "Workspace Tidy Sprint",
+    "description": "Set a timer for 5 minutes. Clean up every piece of physical clutter on your desk, discard trash, and wipe the surfaces down.",
+    "time": "5 minutes",
+    "category": "Productivity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 59,
+    "title": "High-Speed Desktop Declutter",
+    "description": "Open your computer's Downloads folder. Select at least 15 files and either delete them or catalog them into proper subfolders.",
+    "time": "5 minutes",
+    "category": "Productivity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 60,
+    "title": "Doodle a Recursive Maze",
+    "description": "Open the doodle canvas. Start at the center and draw a recursive, winding maze that reaches the outer edges. Make it challenging.",
+    "time": "15 minutes",
+    "category": "Creativity",
+    "moods": ["Restless"]
+  },
+  {
+    "id": 61,
+    "title": "Palming: The Soft Eye Reset",
+    "description": "Rub your palms together rapidly to generate heat. Close your eyes and gently cup your warm palms over your eye sockets.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 62,
+    "title": "The Double-Sigh of Relief",
+    "description": "Take two quick inhales through your nose, then let out a slow, long sigh through your mouth. Repeat 5 times to reset your nervous system.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 63,
+    "title": "Progressive Shoulder Release",
+    "description": "Tense your shoulders up toward your ears as high as possible for 5 seconds, then drop them heavily. Repeat 3 times to release neck tension.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 64,
+    "title": "Tense and Release Fists",
+    "description": "Clench your fists as hard as possible for 7 seconds, focusing on the tension. Then release completely, letting your hands go limp.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 65,
+    "title": "Box Breathing: 4-4-4-4 Cycle",
+    "description": "Open the Box Breathing widget. Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds, and hold for 4 seconds. Repeat 4 times.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 66,
+    "title": "Emergency Grounding Protocol",
+    "description": "Open the Grounding tool. Interactively catalog 5 sights, 4 touches, 3 sounds, 2 smells, and write 1 grounding mantra.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 67,
+    "title": "Release Worries: The Burn Ritual",
+    "description": "Open the Reflections Log. Select the Anxiety prompt, pour out your worries, and click 'Release & Burn' to dissolve them in ashes.",
+    "time": "2 minutes",
+    "category": "Reflection",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 68,
+    "title": "Catalog 3 Controllable Things",
+    "description": "Write down 3 things in your life that are under your direct control right now (e.g., your breathing, your next click, your posture).",
+    "time": "2 minutes",
+    "category": "Reflection",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 69,
+    "title": "Window Check: 3 Slow Things",
+    "description": "Look out your physical window. Spot and describe 3 slow-moving things (e.g., a drifting cloud, a leaf waving, a slow bird).",
+    "time": "2 minutes",
+    "category": "Reflection",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 70,
+    "title": "Mindful Water Hydration",
+    "description": "Get a glass of cold water. Drink it slowly, taking exactly 2 minutes. Pay attention to the temperature and the physical sensation.",
+    "time": "2 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 71,
+    "title": "Listen to Rainy Cafe Soundscapes",
+    "description": "Open the Sound Panel. Click the 'Rainy Cafe' preset button. Close your eyes and focus on the rain and lofi waves for 5 minutes.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 72,
+    "title": "Paint Blue Ocean Swells",
+    "description": "Open the doodle canvas. Select a soft blue or green brush color. Draw slow, waving ocean swells to calm your visual focus.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 73,
+    "title": "Deep Focus Soundscape Immersion",
+    "description": "Open the Sound Panel. Select the 'Deep Focus' preset (Ambient Only / Drone). Close your eyes and focus on the deep sound hum.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 74,
+    "title": "Five-Minute Absolute Silence",
+    "description": "Sit quietly in your chair. Close your eyes. Turn off all music and synthesizers. Sit in absolute silence until the timer completes.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 75,
+    "title": "Reframe a Worry",
+    "description": "Write down a major worry in your journal. Below it, write a realistic counter-thought. E.g., 'This day is ruined' vs 'I can reset now'.",
+    "time": "5 minutes",
+    "category": "Reflection",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 76,
+    "title": "Count 50 Cardiac Heartbeats",
+    "description": "Place two fingers on your wrist or neck pulse. Sit quietly and count exactly 50 beats, focusing entirely on your pulse rhythm.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 77,
+    "title": "Slowing Down Brushstrokes",
+    "description": "Open the doodle canvas. Draw overlapping circular loops slowly and repeatedly. Focus on the smoothness of the brush movement.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 78,
+    "title": "Visualize a Quiet Forest",
+    "description": "Close your eyes. Imagine standing in a quiet forest clearing. Visualize the green light, the smell of pine, and the cool air.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 79,
+    "title": "Wrist and Jaw Release Stretches",
+    "description": "Slowly open your mouth wide to release jaw clenching. Gently stretch your wrists downward to release computer keyboard strain.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 80,
+    "title": "Self-Compassion Letter",
+    "description": "Open the Reflections Log. Write a paragraph to yourself as if you are advising a close friend who is going through a busy day.",
+    "time": "15 minutes",
+    "category": "Reflection",
+    "moods": ["Stressed"]
+  },
+  {
+    "id": 81,
+    "title": "Trace a Dust Mote in Light",
+    "description": "Find a ray of light in your room. Locate a single floating dust speck and follow its movement with your eyes.",
+    "time": "30 seconds",
+    "category": "Observation",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 82,
+    "title": "Doodle a 3-Second Monster",
+    "description": "Open the doodle canvas. Draw a single abstract blob, add two eyes and a jagged smile. Admire your rapid monster creation.",
+    "time": "30 seconds",
+    "category": "Creativity",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 83,
+    "title": "Close Your Oldest Tab",
+    "description": "Scan your open browser tabs. Identify the single tab that has been open the longest and close it. Feel the virtual relief.",
+    "time": "30 seconds",
+    "category": "Productivity",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 84,
+    "title": "The 30-Second Silent Scream",
+    "description": "Open your mouth as wide as possible as if screaming silently. Hold for 10 seconds to release built-up tension in your jaw.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 85,
+    "title": "Cold Object Sensory Check",
+    "description": "Touch the coldest object near you (a metal frame, glass window, or key). Focus 100% on the temperature.",
+    "time": "30 seconds",
+    "category": "Observation",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 86,
+    "title": "Pen Gravity Balancing Act",
+    "description": "Take a pen or pencil and try to balance it horizontally on the tip of your index finger for exactly 10 seconds.",
+    "time": "30 seconds",
+    "category": "Challenge",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 87,
+    "title": "Double-Sigh Breathing Reset",
+    "description": "Take two quick inhales through your nose, then let out a slow, long sigh through your mouth. Centering yourself instantly.",
+    "time": "30 seconds",
+    "category": "Wellness",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 88,
+    "title": "Reverse-Speak a Word",
+    "description": "Pick a common word (like 'keyboard'). Pronounce it backwards out loud 5 times. Notice how quickly it loses all meaning.",
+    "time": "2 minutes",
+    "category": "Linguistics",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 89,
+    "title": "Name Your Signature Color",
+    "description": "Scan your workspace. Find the most dominant color and give it an absurd, overly dramatic paint name (e.g., 'Procrastination Indigo').",
+    "time": "2 minutes",
+    "category": "Creativity",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 90,
+    "title": "Define Your Mood as Weather",
+    "description": "If your current mood was a weather forecast (e.g., 'Static fog with a chance of drizzle'), what would it be? Write it down.",
+    "time": "2 minutes",
+    "category": "Reflection",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 91,
+    "title": "Phantom Smell Identification",
+    "description": "Close your eyes and take a deep inhale. Try to isolate and identify the subtle smells of dust, paper, wood, or coffee around you.",
+    "time": "2 minutes",
+    "category": "Observation",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 92,
+    "title": "History: The Shortest War",
+    "description": "Read a 2-minute overview of the Anglo-Zanzibar War of 1896, which lasted exactly 38 minutes before Zanzibar surrendered.",
+    "time": "5 minutes",
+    "category": "History",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 93,
+    "title": "Wombat Cube Poop Science",
+    "description": "Look up why wombats produce cube-shaped droppings. Learn how this strange evolutionary trait keeps their territory markers from rolling away.",
+    "time": "5 minutes",
+    "category": "Science",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 94,
+    "title": "Random Wikipedia Sentence Log",
+    "description": "Click 'Random' on Wikipedia. Copy the very first sentence of the article and log it in your Reflections journal.",
+    "time": "5 minutes",
+    "category": "Learning",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 95,
+    "title": "Reverse Breath Counting",
+    "description": "Close your eyes. Take deep breaths. Count down from 20 to 1 with each exhale. If your mind drifts, restart from 20.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 96,
+    "title": "Cozy Deep Space Noise Focus",
+    "description": "Open the Sound Panel. Turn off lofi and rain. Turn on the 'Drone' (Ambient Only) slider to 50% and listen for 60 seconds.",
+    "time": "5 minutes",
+    "category": "Wellness",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 97,
+    "title": "Write a 24-Hour Future Note",
+    "description": "Write a single sentence to your future self. What is one piece of advice or joke you want yourself to read tomorrow?",
+    "time": "5 minutes",
+    "category": "Reflection",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 98,
+    "title": "Paint Three Canvas Pixels",
+    "description": "Open the doodle canvas. Draw exactly 3 tiny colored pixels side by side, zoom in fully, and admire your minimal artwork.",
+    "time": "5 minutes",
+    "category": "Creativity",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 99,
+    "title": "Pick Space Based on Shadow",
+    "description": "Look at the shadow cast by your hand. Choose a workspace theme Space (light/dark/ambient) that matches its tone.",
+    "time": "5 minutes",
+    "category": "Productivity",
+    "moods": ["Unmotivated"]
+  },
+  {
+    "id": 100,
+    "title": "Fictionalize Your Trash Can",
+    "description": "Look at your trash bin. Give it a majestic royal title and write a 1-sentence fictional backstory for it in your journal.",
+    "time": "15 minutes",
+    "category": "Creativity",
+    "moods": ["Unmotivated"]
+  }
+]
